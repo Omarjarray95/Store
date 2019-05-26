@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Book Store</title>
+    </head>
+    <body>
+        {% if loggedIn == false %}
+            <div>
+                <form action="/BookStore/login" method="post">
+                    <table>
+                        <tr>
+                            <td>
+                                Username
+                            </td>
+                            <td>
+                                <input name="username" type="text">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Password
+                            </td>
+                            <td>
+                                <input name="password" type="password">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+
+                            </td>
+                            <td>
+                                <input value="Login" type="submit">
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+
+                <span>{{ error_message }}</span>
+            </div>
+
+            <span>
+                <a href="/BookStore/listCart">Cart</a> : {{ cart }}
+            </span>
+
+            <a href="/BookStore/resetCart">Reset Cart</a>
+
+            <form action="/BookStore/searchProducts" method="post">
+                <table>
+                    <tr>
+                        <td>
+                            Search Through Products
+                        </td>
+                        <td>
+                            <input type="text" name="product">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+
+                        </td>
+                        <td>
+                            <input type="submit" value="Search">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="/BookStore/listPromotedProducts">Show Products In Promotion</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        {% for category in categories %}
+                            <td>
+                                <a href="/BookStore/listCategoryProducts/{{ category.code }}">{{ category.name }}</a>
+                            </td>
+                        {% endfor %}
+                    </tr>
+                </table>
+            </form>
+        {% else %}
+            <a href="/BookStore/logout">LogOut</a>
+            <a href="/BookStore/addCategories">Add Categories</a>
+            <a href="/BookStore/listCategories">Categories List</a>
+            <a href="/BookStore/addProducts">Add Products</a>
+        {% endif %}
+
+        {% block body %}
+        {% endblock %}
+    </body>
+</html>

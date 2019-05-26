@@ -1,0 +1,44 @@
+{% extends "/index.html.twig" %}
+
+{% block body %}
+    <h1>Add New Promotion</h1>
+
+    <form action="/BookStore/addPromotion/{{ id }}" method="post">
+        <table>
+            <tr>
+                <td>
+                    Promotion
+                </td>
+                <td>
+                    <input name="promotion" type="number" value="0"> <span>%</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    From
+                </td>
+                <td>
+                    <input name="startingDate" type="date">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    To
+                </td>
+                <td>
+                    <input name="endDate" type="date">
+                </td>
+            </tr>
+            <tr>
+                <td>
+
+                </td>
+                <td>
+                    <input value="Add" type="submit">
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <span>{{ error_message }}</span>
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends "/index.html.twig" %}
+
+{% block body %}
+    <h1>Add New Product</h1>
+
+    <form enctype="multipart/form-data" action="/BookStore/addProduct" method="post">
+        <table>
+            <tr>
+                <td>
+                    Designation
+                </td>
+                <td>
+                    <input name="designation" type="text">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Stock Quantity
+                </td>
+                <td>
+                    <input name="quantity" type="number" value="0"> <span>Units</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Price
+                </td>
+                <td>
+                    <input name="price" type="number" step="any" value="0"> <span>$</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Photo
+                </td>
+                <td>
+                    <input name="photo" type="file">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Available
+                </td>
+                <td>
+                    <input name="available" type="checkbox" value="false">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Category
+                </td>
+                <td>
+                    <select name="category">
+                        <option value=""></option>
+                        {% for category in categories %}
+                            <option value="{{ category.code }}">{{ category.name }}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+
+                </td>
+                <td>
+                    <input value="Add" type="submit">
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <span>{{ error_message }}</span>
+{% endblock %}

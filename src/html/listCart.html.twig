@@ -1,0 +1,36 @@
+{% extends "/index.html.twig" %}
+
+{% block body %}
+    <h1>Your Cart: {{ total }}$</h1>
+
+    <table>
+        <tr>
+            {% for product in products %}
+                <td>
+                    <li><strong>Designation : </strong>{{ product[0].designation }}</li>
+
+                    <li><strong>Category : </strong>{{ product[0].category.name }}</li>
+
+                    <li>
+                        <strong>In Promotion : </strong>
+                        {% if product[0].inPromotion != null %}
+                            <span>{{ product[0].inPromotion.promotion }}%
+                                <strong>From</strong> {{ product[0].inPromotion.startingDate | date('j F Y') }}
+                                <strong>To</strong> {{ product[0].inPromotion.endDate | date('j F Y') }}</span>
+                        {% else %}
+                                No
+                        {% endif %}
+                    </li>
+                    <li><strong>Price : </strong>{{ product[0].price }}$</li>
+                    <li><strong>Quantity : </strong>{{ product[1] }} Units</li>
+                    <li><strong>Price To Pay : </strong>{{ product[2] }} Units</li>
+                    <a href="/BookStore/deleteFromCart/{{ product[0].reference }}">Delete From Cart</a>
+                    <form action="/BookStore/orderFromCart/{{ product[0].reference }}/{{ product[1] }}" method="post">
+                        <input name="email" type="email">
+                        <input type="submit" value="Order">
+                    </form>
+                </td>
+            {% endfor %}
+        </tr>
+    </table>
+{% endblock %}

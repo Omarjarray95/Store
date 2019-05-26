@@ -1,0 +1,66 @@
+{% extends "/index.html.twig" %}
+
+{% block body %}
+    <h1>Add To Cart</h1>
+
+    <form action="/BookStore/addProductToCart/{{ product.reference }}" method="post">
+        <table>
+            <tr>
+                <td>
+                    <strong>Designation : </strong>
+                </td>
+                <td>
+                    {{ product.designation }}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <strong>Price : </strong>
+                </td>
+                <td>
+                    {{ product.price }}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <strong>In Promotion : </strong>
+                </td>
+                <td>
+                    {% if product.inPromotion != null %}
+                        <span>{{ product.inPromotion.promotion }}%
+                                <strong>From</strong> {{ product.inPromotion.startingDate | date('j F Y') }}
+                            <strong>To</strong> {{ product.inPromotion.endDate | date('j F Y') }}</span>
+                    {% else %}
+                        No
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <strong>Category : </strong>
+                </td>
+                <td>
+                    {{ product.category.name }}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <strong>Quantity : </strong>
+                </td>
+                <td>
+                    <input name="quantity" type="number" value="0" max="{{ product.quantity }}"> <span>Units</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+
+                </td>
+                <td>
+                    <input value="Add To Cart" type="submit">
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <span>{{ error_message }}</span>
+{% endblock %}

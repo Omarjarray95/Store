@@ -1,0 +1,53 @@
+{% extends "/index.html.twig" %}
+
+{% block body %}
+    <h1>List Of Products</h1>
+
+    <table>
+        <tr>
+            {% for product in products %}
+                <td>
+                    {% if product.photo != null %}
+                        <img src="src/public/images/{{ product.photo }}" width="250" height="250">
+                    {% else %}
+                        <img src="../public/images/Cart.png" width="250" height="250">
+                    {% endif %}
+                    <li><strong>Designation : </strong>{{ product.designation }}</li>
+                    <li><strong>Stock Quantity : </strong>{{ product.quantity }} Units</li>
+                    <li><strong>Price : </strong>{{ product.price }}$</li>
+                    <li><strong>Available : </strong>
+                        {% if product.available == true %}
+                            Yes
+                        {% else %}
+                            No
+                        {% endif %}
+                    </li>
+                    <li>
+                        <strong>In Promotion : </strong>
+                        {% if product.inPromotion != null %}
+                            <span>{{ product.inPromotion.promotion }}%
+                                <strong>From</strong> {{ product.inPromotion.startingDate | date('j F Y') }}
+                                <strong>To</strong> {{ product.inPromotion.endDate | date('j F Y') }}</span>
+                        {% else %}
+                            No
+                        {% endif %}
+                    </li>
+                    <li><strong>Category : </strong>{{ product.category.name }}</li>
+                    {% if product.available == true or product.quantity == 0 %}
+                        <a href="/BookStore/addToCart/{{ product.reference }}">
+                            <button>
+                                Add To Cart
+                            </button>
+                        </a>
+                    {% else %}
+                        <a href="/BookStore/addToCart/{{ product.reference }}">
+                            <button disabled>
+                                Add To Cart
+                            </button>
+                        </a>
+                    {% endif %}
+                </td>
+            {% endfor %}
+        </tr>
+    </table>
+{% endblock %}

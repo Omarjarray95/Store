@@ -1,0 +1,36 @@
+{% extends "/index.html.twig" %}
+
+{% block body %}
+    <h1>Login To Your Account</h1>
+
+    <form action="/BookStore/login" method="post">
+        <table>
+            <tr>
+                <td>
+                    Username
+                </td>
+                <td>
+                    <input name="username" type="text">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Password
+                </td>
+                <td>
+                    <input name="password" type="password">
+                </td>
+            </tr>
+            <tr>
+                <td>
+
+                </td>
+                <td>
+                    <input value="Login" type="submit">
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <span>{{ error_message }}</span>
+{% endblock %}
