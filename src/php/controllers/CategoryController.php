@@ -12,7 +12,8 @@ class CategoryController extends Controller
         session_start();
 
         echo $this->twig->render('addCategory.html.twig',
-            ['error_message' => '']);
+            ['error_message' => '',
+                'loggedIn' => $_SESSION['loggedIn']]);
     }
 
     public function Add()
@@ -33,13 +34,15 @@ class CategoryController extends Controller
             catch (OptimisticLockException $e)
             {
                 echo $this->twig->render('addCategory.html.twig',
-                    ['error_message' => 'Server Problem ...']);
+                    ['error_message' => 'Server Problem ...',
+                    'loggedIn' => $_SESSION['loggedIn']]);
             }
         }
         else
         {
             echo $this->twig->render('addCategory.html.twig',
-                ['error_message' => 'Invalid Information']);
+                ['error_message' => 'Invalid Information',
+                    'loggedIn' => $_SESSION['loggedIn']]);
         }
     }
 
@@ -50,7 +53,8 @@ class CategoryController extends Controller
         $categories = $this->em->getRepository('App\Model\Category')->findBy([], ['name' => 'ASC']);
 
         echo $this->twig->render('allCategories.html.twig',
-            ['categories' => $categories]);
+            ['categories' => $categories,
+                'loggedIn' => $_SESSION['loggedIn']]);
     }
 
     public function RenderUpdate($id)
@@ -60,7 +64,9 @@ class CategoryController extends Controller
         $category = $this->em->getRepository('App\Model\Category')->find($id);
 
         echo $this->twig->render('updateCategory.html.twig',
-            ['category' => $category, 'error_message' => '']);
+            ['category' => $category,
+                'error_message' => '',
+                'loggedIn' => $_SESSION['loggedIn']]);
     }
 
     public function Update($id)
@@ -81,13 +87,15 @@ class CategoryController extends Controller
             catch (OptimisticLockException $e)
             {
                 echo $this->twig->render('updateCategory.html.twig',
-                    ['error_message' => 'Server Problem ...']);
+                    ['error_message' => 'Server Problem ...',
+                        'loggedIn' => $_SESSION['loggedIn']]);
             }
         }
         else
         {
             echo $this->twig->render('updateCategory.html.twig',
-                ['error_message' => 'Invalid Information']);
+                ['error_message' => 'Invalid Information',
+                    'loggedIn' => $_SESSION['loggedIn']]);
         }
     }
 

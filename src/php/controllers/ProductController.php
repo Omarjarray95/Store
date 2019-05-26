@@ -283,7 +283,7 @@ class ProductController extends Controller
             echo $this->twig->render('searchProducts.html.twig',
                 ['products' => $products,
                     'cart' => $_SESSION['cart'],
-                    'loggedIn' => $_SESSION['loggedIn']]);
+                    'loggedIn' => false]);
         }
         else
         {
@@ -325,7 +325,7 @@ class ProductController extends Controller
 
         echo $this->twig->render('searchProducts.html.twig',
             ['products' => $products,
-                'loggedIn' => $_SESSION['loggedIn'],
+                'loggedIn' => false,
                 'cart' => $_SESSION['cart']]);
     }
 
@@ -363,7 +363,7 @@ class ProductController extends Controller
 
         echo $this->twig->render('searchProducts.html.twig',
             ['products' => $products,
-                'loggedIn' => $_SESSION['loggedIn'],
+                'loggedIn' => false,
                 'cart' => $_SESSION['cart']]);
     }
 
@@ -376,7 +376,7 @@ class ProductController extends Controller
         echo $this->twig->render('addToCart.html.twig',
             ['product' => $product,
                 'error_message' => '',
-                'loggedIn' => $_SESSION['loggedIn'],
+                'loggedIn' => false,
                 'cart' => $_SESSION['cart']]);
     }
 
@@ -415,7 +415,7 @@ class ProductController extends Controller
             echo $this->twig->render('addToCart.html.twig',
                 ['product' => $product,
                     'error_message' => 'Invalid Quantity (Must Be Less Than 10 Units)',
-                    'loggedIn' => $_SESSION['loggedIn'],
+                    'loggedIn' => false,
                     'cart' => $_SESSION['cart']]);
         }
     }
@@ -453,7 +453,7 @@ class ProductController extends Controller
         echo $this->twig->render('listCart.html.twig',
             ['products' => $products,
                 'total' => $total,
-                'loggedIn' => $_SESSION['loggedIn'],
+                'loggedIn' => false,
                 'cart' => $_SESSION['cart']]);
     }
 
@@ -486,8 +486,8 @@ class ProductController extends Controller
             $mail->isSMTP();                                            // Set mailer to use SMTP
             $mail->Host       = 'smtp.gmail.com';  // Specify main and backup SMTP servers
             $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
-            $mail->Username   = 'Omar.jarray@esprit.tn';                     // SMTP username
-            $mail->Password   = 'loulou95';                               // SMTP password
+            $mail->Username   = '';                     // SMTP username
+            $mail->Password   = '';                               // SMTP password
             $mail->SMTPSecure = 'tls';
             $mail->Port = 587;
 
